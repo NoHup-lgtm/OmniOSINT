@@ -11,7 +11,7 @@ pub fn print_banner() {
     "#;
 
     let subtitle = "       [ The All-Seeing Eye Framework v1.0 ]";
-    let author =   "           Coded by NoHup-ltgm"; 
+    let author =   "           Coded by NoHup-lgtm"; 
 
     println!("{}", art.bright_cyan().bold());
     println!("{}", subtitle.white().bold());
