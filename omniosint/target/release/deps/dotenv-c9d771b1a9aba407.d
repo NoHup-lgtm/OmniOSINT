@@ -1,0 +1,11 @@
+/Users/arthuraraujo/Documents/GitHub/OmniOSINT/omniosint/target/release/deps/dotenv-c9d771b1a9aba407.d: /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/lib.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/parse.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/errors.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/iter.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/find.rs
+
+/Users/arthuraraujo/Documents/GitHub/OmniOSINT/omniosint/target/release/deps/libdotenv-c9d771b1a9aba407.rlib: /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/lib.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/parse.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/errors.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/iter.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/find.rs
+
+/Users/arthuraraujo/Documents/GitHub/OmniOSINT/omniosint/target/release/deps/libdotenv-c9d771b1a9aba407.rmeta: /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/lib.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/parse.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/errors.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/iter.rs /Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/find.rs
+
+/Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/lib.rs:
+/Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/parse.rs:
+/Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/errors.rs:
+/Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/iter.rs:
+/Users/arthuraraujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dotenv-0.15.0/src/find.rs:
