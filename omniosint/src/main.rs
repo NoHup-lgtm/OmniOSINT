@@ -10,7 +10,7 @@
  *
  * OMNIOSINT - Open Source Intelligence Framework
  * --------------------------------------------------
- * Author: NoHup-ltgm
+ * Author: NoHup-lgtm
  * License: MIT
  * "Watching the watchers."
  */
