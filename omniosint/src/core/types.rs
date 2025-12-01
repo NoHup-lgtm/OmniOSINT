@@ -1,21 +1,24 @@
-// src/core/types.rs
 use serde::{Serialize, Deserialize};
 use async_trait::async_trait;
 use anyhow::Result;
 use std::fmt;
 use colored::*;
+use reqwest::Client; // <--- Importante!
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TargetType {
     IP,
     Domain,
     Username,
+    RealName,    // <--- Adicionei
     Email,
     Phone,
+    DiscordID,   // <--- Adicionei
     OpenPort,
     Technology,
     SensitiveFile,
     Vulnerability,
+    Location,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -47,5 +50,6 @@ pub trait OsintModule: Send + Sync {
     #[allow(dead_code)] 
     fn description(&self) -> String;
     
-    async fn run(&self, target: &Target) -> Result<Vec<Target>>;
+    // MUDANÇA CRÍTICA: Adicionamos 'client' aqui!
+    async fn run(&self, target: &Target, client: &Client) -> Result<Vec<Target>>;
 }

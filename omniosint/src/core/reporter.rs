@@ -98,6 +98,8 @@ impl HtmlReporter {
                 Technology: {{ color: '#7b1fa2', size: 15 }},
                 Email: {{ color: '#1976d2', size: 20 }},
                 SensitiveFile: {{ color: '#ff6d00', size: 25 }},
+                Vulnerability: {{ color: '#388e3c', size: 25 }},
+                Location: {{ color: '#00796b', size: 20
             }},
             physics: {{
                 stabilization: false,

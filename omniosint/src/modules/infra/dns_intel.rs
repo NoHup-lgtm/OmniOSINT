@@ -13,7 +13,7 @@ impl OsintModule for DnsIntelModule {
     #[allow(dead_code)]
     fn description(&self) -> String { "Extrai registros MX, TXT e NS".to_string() }
 
-    async fn run(&self, target: &Target) -> Result<Vec<Target>> {
+    async fn run(&self, target: &Target, _client: &reqwest::Client) -> Result<Vec<Target>> {
         if target.kind != TargetType::Domain {
             return Ok(vec![]);
         }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OmniOSINT Report</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <style type="text/css">
+      body {
+        background-color: #111;
+        color: #0f0;
+        font-family: monospace;
+      }
+      #mynetwork {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #333;
+      }
+      h1 {
+        text-align: center;
+        text-shadow: 0 0 10px #0f0;
+      }
+      .stats {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>OmniOSINT Operations Graph</h1>
+    <div class="stats">Total Targets Found: 174</div>
+    <div id="mynetwork"></div>
+    <script type="text/javascript">
+      // Dados vindos do Rust
+      var nodes = new vis.DataSet([
+        {id: 0, label: 'Arthur Araujo', group: 'RealName'},
+        {id: 1, label: 'arthuraraujo', group: 'Username'},
+        {id: 2, label: 'arthur.araujo', group: 'Username'},
+        {id: 3, label: 'arthur_araujo', group: 'Username'},
+        {id: 4, label: 'aaraujo', group: 'Username'},
+        {id: 5, label: 'arthur123', group: 'Username'},
+        {id: 6, label: 'itsarthur', group: 'Username'},
+        {id: 7, label: 'https://github.com/arthuraraujo', group: 'Domain'},
+        {id: 8, label: 'https://twitter.com/arthuraraujo', group: 'Domain'},
+        {id: 9, label: 'https://www.instagram.com/arthuraraujo/', group: 'Domain'},
+        {id: 10, label: 'https://www.reddit.com/user/arthuraraujo', group: 'Domain'},
+        {id: 11, label: 'https://www.tiktok.com/@arthuraraujo', group: 'Domain'},
+        {id: 12, label: 'https://twitter.com/arthur.araujo', group: 'Domain'},
+        {id: 13, label: 'https://www.instagram.com/arthur.araujo/', group: 'Domain'},
+        {id: 14, label: 'https://www.reddit.com/user/arthur.araujo', group: 'Domain'},
+        {id: 15, label: 'https://www.tiktok.com/@arthur.araujo', group: 'Domain'},
+        {id: 16, label: 'https://twitter.com/arthur_araujo', group: 'Domain'},
+        {id: 17, label: 'https://www.instagram.com/arthur_araujo/', group: 'Domain'},
+        {id: 18, label: 'https://www.reddit.com/user/arthur_araujo', group: 'Domain'},
+        {id: 19, label: 'https://www.tiktok.com/@arthur_araujo', group: 'Domain'},
+        {id: 20, label: 'https://github.com/aaraujo', group: 'Domain'},
+        {id: 21, label: 'https://twitter.com/aaraujo', group: 'Domain'},
+        {id: 22, label: 'https://www.instagram.com/aaraujo/', group: 'Domain'},
+        {id: 23, label: 'https://www.reddit.com/user/aaraujo', group: 'Domain'},
+        {id: 24, label: 'https://www.tiktok.com/@aaraujo', group: 'Domain'},
+        {id: 25, label: 'https://github.com/arthur123', group: 'Domain'},
+        {id: 26, label: 'https://twitter.com/arthur123', group: 'Domain'},
+        {id: 27, label: 'https://www.instagram.com/arthur123/', group: 'Domain'},
+        {id: 28, label: 'https://www.reddit.com/user/arthur123', group: 'Domain'},
+        {id: 29, label: 'https://www.tiktok.com/@arthur123', group: 'Domain'},
+        {id: 30, label: 'https://github.com/itsarthur', group: 'Domain'},
+        {id: 31, label: 'https://twitter.com/itsarthur', group: 'Domain'},
+        {id: 32, label: 'https://www.instagram.com/itsarthur/', group: 'Domain'},
+        {id: 33, label: 'https://www.reddit.com/user/itsarthur', group: 'Domain'},
+        {id: 34, label: 'https://www.tiktok.com/@itsarthur', group: 'Domain'},
+        {id: 35, label: 'github.com:22', group: 'OpenPort'},
+        {id: 36, label: 'github.com:443', group: 'OpenPort'},
+        {id: 37, label: 'registry.github.com', group: 'Domain'},
+        {id: 38, label: 'garage.github.com', group: 'Domain'},
+        {id: 39, label: 'gist.github.com', group: 'Domain'},
+        {id: 40, label: 'www.github.com', group: 'Domain'},
+        {id: 41, label: 'examregistration.github.com', group: 'Domain'},
+        {id: 42, label: 'examadmin.github.com', group: 'Domain'},
+        {id: 43, label: 'examregistration-uat-api.github.com', group: 'Domain'},
+        {id: 44, label: 'examregistration-api.github.com', group: 'Domain'},
+        {id: 45, label: 'examadmin-uat.github.com', group: 'Domain'},
+        {id: 46, label: 'api.mcp.github.com', group: 'Domain'},
+        {id: 47, label: 'server: github.com', group: 'Technology'},
+        {id: 48, label: 'MX: alt3.aspmx.l.google.com', group: 'Technology'},
+        {id: 49, label: 'MX: aspmx.l.google.com', group: 'Technology'},
+        {id: 50, label: 'MX: alt2.aspmx.l.google.com', group: 'Technology'},
+        {id: 51, label: 'MX: alt1.aspmx.l.google.com', group: 'Technology'},
+        {id: 52, label: 'MX: alt4.aspmx.l.google.com', group: 'Technology'},
+        {id: 53, label: 'TXT: google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks', group: 'Technology'},
+        {id: 54, label: 'TXT: docusign=087098e3-3d46-47b7-9b4e-8a23028154cd', group: 'Technology'},
+        {id: 55, label: 'TXT: v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com ip', group: 'Technology'},
+        {id: 56, label: 'TXT: google-site-verification=UTM-3akMgubp6tQtgEuAkYNYLyYAvpTnnSrDMWoDR3o', group: 'Technology'},
+        {id: 57, label: 'twitter.com:80', group: 'OpenPort'},
+        {id: 58, label: 'twitter.com:443', group: 'OpenPort'},
+        {id: 59, label: 'twitter.com:8080', group: 'OpenPort'},
+        {id: 60, label: 'api-stream.twitter.com', group: 'Domain'},
+        {id: 61, label: 'api.twitter.com', group: 'Domain'},
+        {id: 62, label: 'mobile.twitter.com', group: 'Domain'},
+        {id: 63, label: 'probe.twitter.com', group: 'Domain'},
+        {id: 64, label: 'smf1-gao-25-sr1.prod.twitter.com', group: 'Domain'},
+        {id: 65, label: 'mms-api.twitter.com', group: 'Domain'},
+        {id: 66, label: 'hbase-pcadmin.qus1.twitter.com', group: 'Domain'},
+        {id: 67, label: 'payments-dev.twitter.com', group: 'Domain'},
+        {id: 68, label: 'www--twitter.com', group: 'Domain'},
+        {id: 69, label: 'https--twitter.com', group: 'Domain'},
+        {id: 70, label: 'server: cloudflare envoy', group: 'Technology'},
+        {id: 71, label: 'x-powered-by: Express', group: 'Technology'},
+        {id: 72, label: 'TXT: google-site-verification=600dQ0pZYsH2xOFt4hYmf5f5NpjCbWE_qk5Y04dErYM', group: 'Technology'},
+        {id: 73, label: 'TXT: google-site-verification=TNhAkfLUeIbzzzSgPNxS5aEkKMf3aUcpPmCK1_kmIvU', group: 'Technology'},
+        {id: 74, label: 'TXT: google-site-verification=F2uUiLUsD6kQlpUVQzxUM3PHa0uPo5GBS84SCG8QwXI', group: 'Technology'},
+        {id: 75, label: 'TXT: google-site-verification=h6dJIv0HXjLOkGAotLAWEzvoi9SxqP4vjpx98vrCvvQ', group: 'Technology'},
+        {id: 76, label: 'TXT: v=spf1 ip4:199.16.156.0/22 ip4:199.59.148.0/22 ip4:8.25.194.0/23 ip4:8.25.196.0/23 ip4:204.92.114.203 ip4:204.92.114.204/31 include:_spf.google.com include:_thirdparty.twitter.com -all', group: 'Technology'},
+        {id: 77, label: 'TXT: google-site-verification=q1ghWjGLX9Ba-Gy_B4n_pAgC_mQYzWmQpOD8CMWl_Hw', group: 'Technology'},
+        {id: 78, label: 'TXT: google-site-verification=P9-NRZ0gaRKRGNDOXOjct5XETPtr3P9D-XA8HnlbAy4', group: 'Technology'},
+        {id: 79, label: 'www.instagram.com:80', group: 'OpenPort'},
+        {id: 80, label: 'www.instagram.com:443', group: 'OpenPort'},
+        {id: 81, label: 'TXT: v=spf1 a ~all', group: 'Technology'},
+        {id: 82, label: '9f057df6115a4bb488c08ea12a835e6e@error-tracking.reddit.com', group: 'Email'},
+        {id: 83, label: '9f057df6115a4bb488c08ea12a835e6e@o418887.ingest.sentry.io', group: 'Email'},
+        {id: 84, label: 'www.reddit.com:80', group: 'OpenPort'},
+        {id: 85, label: 'www.reddit.com:443', group: 'OpenPort'},
+        {id: 86, label: 'www.reddit.com--1l1--------s.migoto11.com', group: 'Domain'},
+        {id: 87, label: 'server: snooserv', group: 'Technology'},
+        {id: 88, label: 'via: 1.1 varnish', group: 'Technology'},
+        {id: 89, label: 'www.tiktok.com:80', group: 'OpenPort'},
+        {id: 90, label: 'www.tiktok.com:443', group: 'OpenPort'},
+        {id: 91, label: 'www.tiktok.com--com.com', group: 'Domain'},
+        {id: 92, label: 'server: TLB', group: 'Technology'},
+        {id: 93, label: 'x-powered-by: Goofy Node', group: 'Technology'},
+        {id: 94, label: 'platform.twitter.com', group: 'Domain'},
+        {id: 95, label: 'tdapi.twitter.com', group: 'Domain'},
+        {id: 96, label: 'td.twitter.com', group: 'Domain'},
+        {id: 97, label: 'tdweb.twitter.com', group: 'Domain'},
+        {id: 98, label: 'tweetdeck.twitter.com', group: 'Domain'},
+        {id: 99, label: 'u002f@arthur.araujo', group: 'Email'},
+        {id: 100, label: 'garage.github.com:22', group: 'OpenPort'},
+        {id: 101, label: 'garage.github.com:443', group: 'OpenPort'},
+        {id: 102, label: 'gist.github.com:22', group: 'OpenPort'},
+        {id: 103, label: 'gist.github.com:443', group: 'OpenPort'},
+        {id: 104, label: 'https://gist.github.com/robots.txt', group: 'SensitiveFile'},
+        {id: 105, label: 'you@domain.com', group: 'Email'},
+        {id: 106, label: 'www.github.com:22', group: 'OpenPort'},
+        {id: 107, label: 'www.github.com:443', group: 'OpenPort'},
+        {id: 108, label: 'https://www.github.com/robots.txt', group: 'SensitiveFile'},
+        {id: 109, label: 'https://www.github.com/.well-known/security.txt', group: 'SensitiveFile'},
+        {id: 110, label: 'examregistration.github.com:80', group: 'OpenPort'},
+        {id: 111, label: 'examregistration.github.com:443', group: 'OpenPort'},
+        {id: 112, label: 'https://examregistration.github.com/.env', group: 'SensitiveFile'},
+        {id: 113, label: 'https://examregistration.github.com/.git/HEAD', group: 'SensitiveFile'},
+        {id: 114, label: 'https://examregistration.github.com/.vscode/sftp.json', group: 'SensitiveFile'},
+        {id: 115, label: 'https://examregistration.github.com/wp-config.php.bak', group: 'SensitiveFile'},
+        {id: 116, label: 'https://examregistration.github.com/config.php.bak', group: 'SensitiveFile'},
+        {id: 117, label: 'https://examregistration.github.com/backup.zip', group: 'SensitiveFile'},
+        {id: 118, label: 'https://examregistration.github.com/backup.sql', group: 'SensitiveFile'},
+        {id: 119, label: 'https://examregistration.github.com/id_rsa', group: 'SensitiveFile'},
+        {id: 120, label: 'https://examregistration.github.com/robots.txt', group: 'SensitiveFile'},
+        {id: 121, label: 'https://examregistration.github.com/sitemap.xml', group: 'SensitiveFile'},
+        {id: 122, label: 'https://examregistration.github.com/server-status', group: 'SensitiveFile'},
+        {id: 123, label: 'https://examregistration.github.com/.DS_Store', group: 'SensitiveFile'},
+        {id: 124, label: 'https://examregistration.github.com/phpinfo.php', group: 'SensitiveFile'},
+        {id: 125, label: 'https://examregistration.github.com/admin/', group: 'SensitiveFile'},
+        {id: 126, label: 'https://examregistration.github.com/.well-known/security.txt', group: 'SensitiveFile'},
+        {id: 127, label: 'examadmin.github.com:80', group: 'OpenPort'},
+        {id: 128, label: 'examadmin.github.com:443', group: 'OpenPort'},
+        {id: 129, label: 'server: Kestrel', group: 'Technology'},
+        {id: 130, label: 'https://examadmin.github.com/robots.txt', group: 'SensitiveFile'},
+        {id: 131, label: 'examregistration-uat-api.github.com:80', group: 'OpenPort'},
+        {id: 132, label: 'examregistration-uat-api.github.com:443', group: 'OpenPort'},
+        {id: 133, label: 'examregistration-api.github.com:80', group: 'OpenPort'},
+        {id: 134, label: 'examregistration-api.github.com:443', group: 'OpenPort'},
+        {id: 135, label: 'examadmin-uat.github.com:80', group: 'OpenPort'},
+        {id: 136, label: 'examadmin-uat.github.com:443', group: 'OpenPort'},
+        {id: 137, label: 'https://examadmin-uat.github.com/robots.txt', group: 'SensitiveFile'},
+        {id: 138, label: 'api.mcp.github.com:80', group: 'OpenPort'},
+        {id: 139, label: 'api.mcp.github.com:443', group: 'OpenPort'},
+        {id: 140, label: 'api-stream.twitter.com:80', group: 'OpenPort'},
+        {id: 141, label: 'api-stream.twitter.com:443', group: 'OpenPort'},
+        {id: 142, label: 'api-stream.twitter.com:8080', group: 'OpenPort'},
+        {id: 143, label: 'api.twitter.com:80', group: 'OpenPort'},
+        {id: 144, label: 'api.twitter.com:443', group: 'OpenPort'},
+        {id: 145, label: 'api.twitter.com:8080', group: 'OpenPort'},
+        {id: 146, label: 'cdn.api.twitter.com', group: 'Domain'},
+        {id: 147, label: 'urls.api.twitter.com', group: 'Domain'},
+        {id: 148, label: 'cdn-dev.api.twitter.com', group: 'Domain'},
+        {id: 149, label: 'failover-cdn.api.twitter.com', group: 'Domain'},
+        {id: 150, label: 'failover-urls.api.twitter.com', group: 'Domain'},
+        {id: 151, label: 'urls-real.api.twitter.com', group: 'Domain'},
+        {id: 152, label: 'mobile.twitter.com:80', group: 'OpenPort'},
+        {id: 153, label: 'mobile.twitter.com:443', group: 'OpenPort'},
+        {id: 154, label: 'mobile.twitter.com:8080', group: 'OpenPort'},
+        {id: 155, label: 'probe.twitter.com:80', group: 'OpenPort'},
+        {id: 156, label: 'probe.twitter.com:443', group: 'OpenPort'},
+        {id: 157, label: 'probe.twitter.com:8080', group: 'OpenPort'},
+        {id: 158, label: 'platform.twitter.com:80', group: 'OpenPort'},
+        {id: 159, label: 'platform.twitter.com:443', group: 'OpenPort'},
+        {id: 160, label: 'widgets.platform.twitter.com', group: 'Domain'},
+        {id: 161, label: 'anywhere.platform.twitter.com', group: 'Domain'},
+        {id: 162, label: 'tdapi.twitter.com:80', group: 'OpenPort'},
+        {id: 163, label: 'tdapi.twitter.com:443', group: 'OpenPort'},
+        {id: 164, label: 'tdapi.twitter.com:8080', group: 'OpenPort'},
+        {id: 165, label: 'td.twitter.com:80', group: 'OpenPort'},
+        {id: 166, label: 'td.twitter.com:443', group: 'OpenPort'},
+        {id: 167, label: 'td.twitter.com:8080', group: 'OpenPort'},
+        {id: 168, label: 'tdweb.twitter.com:80', group: 'OpenPort'},
+        {id: 169, label: 'tdweb.twitter.com:443', group: 'OpenPort'},
+        {id: 170, label: 'tdweb.twitter.com:8080', group: 'OpenPort'},
+        {id: 171, label: 'tweetdeck.twitter.com:80', group: 'OpenPort'},
+        {id: 172, label: 'tweetdeck.twitter.com:443', group: 'OpenPort'},
+        {id: 173, label: 'tweetdeck.twitter.com:8080', group: 'OpenPort'},
+      ]);
+
+      // Lógica de Conexão Automática (JavaScript)
+      var edges_arr = [];
+      var all_nodes = nodes.get();
+
+      all_nodes.forEach(function(nodeA) {
+          all_nodes.forEach(function(nodeB) {
+              if (nodeA.id !== nodeB.id) {
+                  // Regra 1: Subdomínio conecta no Domínio
+                  if (nodeA.label.includes(nodeB.label) && nodeB.group === 'Domain' && nodeA.group === 'Domain') {
+                      if (nodeA.label !== nodeB.label) {
+                           edges_arr.push({from: nodeB.id, to: nodeA.id});
+                      }
+                  }
+                  // Regra 2: Portas e Tech conectam no seu Host
+                  if (nodeA.label.includes(nodeB.label) && (nodeA.group === 'OpenPort' || nodeA.group === 'Technology' || nodeA.group === 'Email')) {
+                       edges_arr.push({from: nodeB.id, to: nodeA.id});
+                  }
+              }
+          });
+      });
+
+      var edges = new vis.DataSet(edges_arr);
+
+      var container = document.getElementById('mynetwork');
+      var data = { nodes: nodes, edges: edges };
+
+      // CÓDIGO CORRIGIDO AQUI:
+      var options = {
+          nodes: {
+              shape: 'dot',
+              size: 20,
+              font: { size: 14, color: '#ffffff' },
+              borderWidth: 2
+          },
+          groups: {
+              Domain: { color: '#d32f2f', size: 30 },
+              OpenPort: { color: '#fbc02d', size: 15 },
+              Technology: { color: '#7b1fa2', size: 15 },
+              Email: { color: '#1976d2', size: 20 },
+              SensitiveFile: { color: '#ff6d00', size: 25 },
+              Vulnerability: { color: '#388e3c', size: 25 },
+              Location: { color: '#00796b', size: 20 },
+              RealName: { color: '#e91e63', size: 35 },
+              Username: { color: '#9c27b0', size: 25 }
+          }, // Fechamento correto de groups
+          physics: {
+              stabilization: false,
+              barnesHut: { gravitationalConstant: -30000, springConstant: 0.04, springLength: 95 }
+          }
+      };
+
+      var network = new vis.Network(container, data, options);
+    </script>
+  </body>
+</html>

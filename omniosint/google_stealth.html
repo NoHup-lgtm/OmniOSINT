@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OmniOSINT Report</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <style type="text/css">
+      body {
+        background-color: #111;
+        color: #0f0;
+        font-family: monospace;
+      }
+      #mynetwork {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #333;
+      }
+      h1 {
+        text-align: center;
+        text-shadow: 0 0 10px #0f0;
+      }
+      .stats {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>OmniOSINT Operations Graph</h1>
+    <div class="stats">Total Targets Found: 76</div>
+    <div id="mynetwork"></div>
+    <script type="text/javascript">
+      // Dados vindos do Rust
+      var nodes = new vis.DataSet([
+        {id: 0, label: 'google.com', group: 'Domain'},
+        {id: 1, label: 'robert@broofa.com', group: 'Email'},
+        {id: 2, label: 'google.com:80', group: 'OpenPort'},
+        {id: 3, label: 'google.com:443', group: 'OpenPort'},
+        {id: 4, label: 'admin@google.com', group: 'Domain'},
+        {id: 5, label: 'onex.wifi.google.com', group: 'Domain'},
+        {id: 6, label: 'accounts.google.com', group: 'Domain'},
+        {id: 7, label: 'hosted-id.google.com', group: 'Domain'},
+        {id: 8, label: 'adwords.google.com', group: 'Domain'},
+        {id: 9, label: 'adwords.google.com.ar', group: 'Domain'},
+        {id: 10, label: 'adwords.google.com.au', group: 'Domain'},
+        {id: 11, label: 'adwords.google.com.br', group: 'Domain'},
+        {id: 12, label: 'adwords.google.com.cn', group: 'Domain'},
+        {id: 13, label: 'adwords.google.com.gr', group: 'Domain'},
+        {id: 14, label: 'server: gws', group: 'Technology'},
+        {id: 15, label: 'MX: smtp.google.com', group: 'Technology'},
+        {id: 16, label: 'TXT: google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o', group: 'Technology'},
+        {id: 17, label: 'TXT: google-site-verification=4ibFUgB-wXLQ_S7vsXVomSTVamuOXBiVAzpR5IZ87D0', group: 'Technology'},
+        {id: 18, label: 'TXT: docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e', group: 'Technology'},
+        {id: 19, label: 'TXT: google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ', group: 'Technology'},
+        {id: 20, label: 'TXT: docusign=1b0a6754-49b1-4db5-8540-d2c12664b289', group: 'Technology'},
+        {id: 21, label: 'TXT: v=spf1 include:_spf.google.com ~all', group: 'Technology'},
+        {id: 22, label: 'https://google.com/robots.txt', group: 'SensitiveFile'},
+        {id: 23, label: 'https://google.com/sitemap.xml', group: 'SensitiveFile'},
+        {id: 24, label: 'https://google.com/.well-known/security.txt', group: 'SensitiveFile'},
+        {id: 25, label: 'https://admin@google.com/robots.txt', group: 'SensitiveFile'},
+        {id: 26, label: 'https://admin@google.com/sitemap.xml', group: 'SensitiveFile'},
+        {id: 27, label: 'https://admin@google.com/.well-known/security.txt', group: 'SensitiveFile'},
+        {id: 28, label: 'accounts.google.com:80', group: 'OpenPort'},
+        {id: 29, label: 'accounts.google.com:443', group: 'OpenPort'},
+        {id: 30, label: 'www.accounts.google.com-----------------------------------------------------------a.apapedulimu.click', group: 'Domain'},
+        {id: 31, label: 'accounts.google.com-----------------------------------------------------------a.apapedulimu.click', group: 'Domain'},
+        {id: 32, label: 'accounts.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 33, label: 'apis.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 34, label: 'content.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 35, label: 'myaccount.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 36, label: 'play.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 37, label: 'ssl.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 38, label: 'www.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 39, label: 'youtube.accounts.google.com--secure.rnoveon.org', group: 'Domain'},
+        {id: 40, label: 'server: ESF', group: 'Technology'},
+        {id: 41, label: 'MX: alt1.gmr-smtp-in.l.google.com', group: 'Technology'},
+        {id: 42, label: 'MX: alt3.gmr-smtp-in.l.google.com', group: 'Technology'},
+        {id: 43, label: 'MX: gmr-smtp-in.l.google.com', group: 'Technology'},
+        {id: 44, label: 'MX: alt2.gmr-smtp-in.l.google.com', group: 'Technology'},
+        {id: 45, label: 'MX: alt4.gmr-smtp-in.l.google.com', group: 'Technology'},
+        {id: 46, label: 'TXT: v=spf1 redirect=_spf.google.com', group: 'Technology'},
+        {id: 47, label: 'TXT: google-site-verification=vK4ovh56lkrEBc4GqA6djmGEyFWtcujz3MuRk-wO9cc', group: 'Technology'},
+        {id: 48, label: 'https://accounts.google.com/robots.txt', group: 'SensitiveFile'},
+        {id: 49, label: 'adwords.google.com:80', group: 'OpenPort'},
+        {id: 50, label: 'adwords.google.com:443', group: 'OpenPort'},
+        {id: 51, label: 'MX: aspmx.l.google.com', group: 'Technology'},
+        {id: 52, label: 'MX: alt2.aspmx.l.google.com', group: 'Technology'},
+        {id: 53, label: 'MX: aspmx4.googlemail.com', group: 'Technology'},
+        {id: 54, label: 'MX: aspmx3.googlemail.com', group: 'Technology'},
+        {id: 55, label: 'MX: alt1.aspmx.l.google.com', group: 'Technology'},
+        {id: 56, label: 'MX: aspmx5.googlemail.com', group: 'Technology'},
+        {id: 57, label: 'MX: aspmx2.googlemail.com', group: 'Technology'},
+        {id: 58, label: 'TXT: v=spf1 redirect=google.com', group: 'Technology'},
+        {id: 59, label: 'https://adwords.google.com/robots.txt', group: 'SensitiveFile'},
+        {id: 60, label: 'adwords.google.com.ar:80', group: 'OpenPort'},
+        {id: 61, label: 'adwords.google.com.ar:443', group: 'OpenPort'},
+        {id: 62, label: 'https://adwords.google.com.ar/robots.txt', group: 'SensitiveFile'},
+        {id: 63, label: 'adwords.google.com.au:80', group: 'OpenPort'},
+        {id: 64, label: 'adwords.google.com.au:443', group: 'OpenPort'},
+        {id: 65, label: 'https://adwords.google.com.au/robots.txt', group: 'SensitiveFile'},
+        {id: 66, label: 'adwords.google.com.br:80', group: 'OpenPort'},
+        {id: 67, label: 'adwords.google.com.br:443', group: 'OpenPort'},
+        {id: 68, label: 'https://adwords.google.com.br/robots.txt', group: 'SensitiveFile'},
+        {id: 69, label: 'adwords.google.com.gr:80', group: 'OpenPort'},
+        {id: 70, label: 'adwords.google.com.gr:443', group: 'OpenPort'},
+        {id: 71, label: 'https://adwords.google.com.gr/robots.txt', group: 'SensitiveFile'},
+        {id: 72, label: 'www.accounts.google.com-----------------------------------------------------------a.apapedulimu.click:53', group: 'OpenPort'},
+        {id: 73, label: 'server: LiteSpeed', group: 'Technology'},
+        {id: 74, label: 'accounts.google.com-----------------------------------------------------------a.apapedulimu.click:53', group: 'OpenPort'},
+        {id: 75, label: 'TXT: v=spf1 +a +mx +ip4:142.91.97.66 ~all', group: 'Technology'},
+      ]);
+
+      // Lógica de Conexão Automática (JavaScript)
+      var edges_arr = [];
+      var all_nodes = nodes.get();
+
+      all_nodes.forEach(function(nodeA) {
+          all_nodes.forEach(function(nodeB) {
+              if (nodeA.id !== nodeB.id) {
+                  // Regra 1: Subdomínio conecta no Domínio
+                  if (nodeA.label.includes(nodeB.label) && nodeB.group === 'Domain' && nodeA.group === 'Domain') {
+                      if (nodeA.label !== nodeB.label) {
+                           edges_arr.push({from: nodeB.id, to: nodeA.id});
+                      }
+                  }
+                  // Regra 2: Portas e Tech conectam no seu Host
+                  if (nodeA.label.includes(nodeB.label) && (nodeA.group === 'OpenPort' || nodeA.group === 'Technology' || nodeA.group === 'Email')) {
+                       edges_arr.push({from: nodeB.id, to: nodeA.id});
+                  }
+              }
+          });
+      });
+
+      var edges = new vis.DataSet(edges_arr);
+
+      var container = document.getElementById('mynetwork');
+      var data = { nodes: nodes, edges: edges };
+
+      // CÓDIGO CORRIGIDO AQUI:
+      var options = {
+          nodes: {
+              shape: 'dot',
+              size: 20,
+              font: { size: 14, color: '#ffffff' },
+              borderWidth: 2
+          },
+          groups: {
+              Domain: { color: '#d32f2f', size: 30 },
+              OpenPort: { color: '#fbc02d', size: 15 },
+              Technology: { color: '#7b1fa2', size: 15 },
+              Email: { color: '#1976d2', size: 20 },
+              SensitiveFile: { color: '#ff6d00', size: 25 },
+              Vulnerability: { color: '#388e3c', size: 25 },
+              Location: { color: '#00796b', size: 20 }
+          }, // Vírgula adicionada e chave fechada
+          physics: {
+              stabilization: false,
+              barnesHut: { gravitationalConstant: -30000, springConstant: 0.04, springLength: 95 }
+          }
+      }; // Ponto e vírgula adicionado
+
+      var network = new vis.Network(container, data, options);
+    </script>
+  </body>
+</html>

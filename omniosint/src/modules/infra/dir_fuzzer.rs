@@ -8,11 +8,10 @@ pub struct DirFuzzerModule;
 #[async_trait]
 impl OsintModule for DirFuzzerModule {
     fn name(&self) -> String { "Sensitive File Fuzzer".to_string() }
-    
-    #[allow(dead_code)]
-    fn description(&self) -> String { "Busca arquivos críticos expostos (.env, .git, backups)".to_string() }
+    fn description(&self) -> String { "Busca arquivos críticos expostos".to_string() }
 
-    async fn run(&self, target: &Target) -> Result<Vec<Target>> {
+    // CORREÇÃO: Adicionado 'client' e removido builder interno
+    async fn run(&self, target: &Target, client: &reqwest::Client) -> Result<Vec<Target>> {
         if target.kind != TargetType::Domain && target.kind != TargetType::IP {
             return Ok(vec![]);
         }
@@ -24,28 +23,11 @@ impl OsintModule for DirFuzzerModule {
         };
 
         let wordlist = vec![
-            ".env",                 
-            ".git/HEAD",            
-            ".vscode/sftp.json",    
-            "wp-config.php.bak",    
-            "config.php.bak",
-            "backup.zip",           
-            "backup.sql",           
-            "id_rsa",               
-            "robots.txt",           
-            "sitemap.xml",
-            "server-status",        
-            ".DS_Store",            
-            "phpinfo.php",          
-            "admin/",              
-            ".well-known/security.txt" 
+            ".env", ".git/HEAD", ".vscode/sftp.json", "wp-config.php.bak",
+            "config.php.bak", "backup.zip", "backup.sql", "id_rsa",
+            "robots.txt", "sitemap.xml", "server-status", ".DS_Store",
+            "phpinfo.php", "admin/", ".well-known/security.txt"
         ];
-
-        let client = reqwest::Client::builder()
-            .timeout(std::time::Duration::from_secs(4)) 
-            .user_agent("Mozilla/5.0")
-            .danger_accept_invalid_certs(true)
-            .build()?;
 
         println!("┃  │   💣  Procurando {} arquivos sensíveis em {}...", wordlist.len(), target.value);
 
@@ -53,26 +35,16 @@ impl OsintModule for DirFuzzerModule {
 
         for file in wordlist {
             let full_url = format!("{}/{}", base_url.trim_end_matches('/'), file);
-
-            let resp = client.get(&full_url).send().await;
-
-            match resp {
-                Ok(response) => {
-                    if response.status().is_success() {
-
-                        let content_len = response.content_length().unwrap_or(0);
-                        if content_len > 0 {
-                             findings.push(Target::new(
-                                &full_url, 
-                                TargetType::SensitiveFile
-                            ));
-                        }
+            // Usa o client global
+            if let Ok(resp) = client.get(&full_url).send().await {
+                if resp.status().is_success() {
+                    let content_len = resp.content_length().unwrap_or(0);
+                    if content_len > 0 {
+                         findings.push(Target::new(&full_url, TargetType::SensitiveFile));
                     }
-                },
-                Err(_) => continue,
+                }
             }
         }
-
         Ok(findings)
     }
 }

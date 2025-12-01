@@ -1,0 +1,11 @@
+/home/araujo/Documentos/ReposGitHub/OmniOSINT/omniosint/target/debug/deps/tokio_socks-81f075f2c13b83d7.d: /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/lib.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/error.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/mod.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/tokio.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/mod.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks4.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks5.rs
+
+/home/araujo/Documentos/ReposGitHub/OmniOSINT/omniosint/target/debug/deps/libtokio_socks-81f075f2c13b83d7.rmeta: /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/lib.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/error.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/mod.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/tokio.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/mod.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks4.rs /home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks5.rs
+
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/lib.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/error.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/mod.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/io/tokio.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/mod.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks4.rs:
+/home/araujo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-socks-0.5.2/src/tcp/socks5.rs:
