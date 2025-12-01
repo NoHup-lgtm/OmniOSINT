@@ -73,7 +73,6 @@ async fn main() {
     let cli = Cli::parse();
     let mut engine = Engine::new();
 
-    // --- REGISTRO DE TODOS OS MÓDULOS ---
     engine.register_module(GithubModule);
     engine.register_module(SocialCheckerModule);
     engine.register_module(PersonReconModule);

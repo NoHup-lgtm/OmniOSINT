@@ -15,12 +15,10 @@ impl OsintModule for WafCheckModule {
 
         let url = if target.value.starts_with("http") { target.value.clone() } else { format!("https://{}", target.value) };
 
-        // Usa HEAD para ser rápido
         if let Ok(resp) = client.head(&url).send().await {
             let headers = resp.headers();
             let mut wafs = Vec::new();
 
-            // Assinaturas baseadas em Headers
             if headers.contains_key("cf-ray") || headers.contains_key("__cfduid") { wafs.push("Cloudflare"); }
             if headers.contains_key("x-amz-cf-id") { wafs.push("AWS CloudFront"); }
             if headers.contains_key("x-akamai-transformed") { wafs.push("Akamai"); }

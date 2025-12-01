@@ -1,9 +1,9 @@
 pub mod users {
-    pub mod email_intel; // <--- Novo
+    pub mod email_intel;
     pub mod github;
-    pub mod person_recon; // <--- Novo
+    pub mod person_recon; 
     pub mod phone_discord;
-    pub mod social_checker; // <--- Novo
+    pub mod social_checker; 
 }
 pub mod infra {
     pub mod dir_fuzzer;
@@ -15,5 +15,5 @@ pub mod infra {
     pub mod shodan_intel;
     pub mod subdomains;
     pub mod tech_stack;
-    pub mod waf_check; // <--- Novo
+    pub mod waf_check; 
 }

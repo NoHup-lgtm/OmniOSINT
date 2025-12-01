@@ -1,19 +1,19 @@
-use serde::{Serialize, Deserialize};
-use async_trait::async_trait;
 use anyhow::Result;
-use std::fmt;
+use async_trait::async_trait;
 use colored::*;
-use reqwest::Client; // <--- Importante!
+use reqwest::Client;
+use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TargetType {
     IP,
     Domain,
     Username,
-    RealName,    // <--- Adicionei
+    RealName,
     Email,
     Phone,
-    DiscordID,   // <--- Adicionei
+    DiscordID,
     OpenPort,
     Technology,
     SensitiveFile,
@@ -46,10 +46,9 @@ impl fmt::Display for Target {
 #[async_trait]
 pub trait OsintModule: Send + Sync {
     fn name(&self) -> String;
-    
-    #[allow(dead_code)] 
+
+    #[allow(dead_code)]
     fn description(&self) -> String;
-    
-    // MUDANÇA CRÍTICA: Adicionamos 'client' aqui!
+
     async fn run(&self, target: &Target, client: &Client) -> Result<Vec<Target>>;
 }

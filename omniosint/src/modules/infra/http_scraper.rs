@@ -1,15 +1,19 @@
-use crate::core::types::{Target, TargetType, OsintModule};
-use async_trait::async_trait;
+use crate::core::types::{OsintModule, Target, TargetType};
 use anyhow::Result;
-use reqwest;
+use async_trait::async_trait;
 use regex::Regex;
+use reqwest;
 
 pub struct HttpScraperModule;
 
 #[async_trait]
 impl OsintModule for HttpScraperModule {
-    fn name(&self) -> String { "HTML Email/Info Extractor".to_string() }
-    fn description(&self) -> String { "Busca e-mails em páginas web".to_string() }
+    fn name(&self) -> String {
+        "HTML Email/Info Extractor".to_string()
+    }
+    fn description(&self) -> String {
+        "Busca e-mails em páginas web".to_string()
+    }
 
     async fn run(&self, target: &Target, client: &reqwest::Client) -> Result<Vec<Target>> {
         if target.kind != TargetType::Domain && target.kind != TargetType::IP {
@@ -23,7 +27,7 @@ impl OsintModule for HttpScraperModule {
         };
 
         let resp = client.get(&url).send().await;
-        
+
         match resp {
             Ok(response) => {
                 let text = response.text().await.unwrap_or_default();
@@ -33,7 +37,12 @@ impl OsintModule for HttpScraperModule {
                 for caps in re.captures_iter(&text) {
                     if let Some(match_) = caps.get(0) {
                         let email_candidate = match_.as_str().to_lowercase();
-                        if email_candidate.ends_with(".png") || email_candidate.ends_with(".jpg") || email_candidate.contains("example.com") { continue; }
+                        if email_candidate.ends_with(".png")
+                            || email_candidate.ends_with(".jpg")
+                            || email_candidate.contains("example.com")
+                        {
+                            continue;
+                        }
                         findings.push(Target::new(&email_candidate, TargetType::Email));
                     }
                 }
@@ -41,7 +50,7 @@ impl OsintModule for HttpScraperModule {
                 findings.dedup_by(|a, b| a.value == b.value);
                 Ok(findings)
             }
-            Err(_) => Ok(vec![]) 
+            Err(_) => Ok(vec![]),
         }
     }
 }
